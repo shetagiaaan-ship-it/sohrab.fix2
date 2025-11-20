@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sohrab Fix - مرکز تعمیرات تخصصی موبایل</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/modir-font/dist/font-face.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+:root{
+  --bg-image:url("https://i.imgur.com/Oan6lHs_d.jpeg?maxwidth=520&shape=thumb&fidelity=high");
+  --text-color:#f5f5f7;
+  --card-bg:rgba(255,255,255,0.06);
+  --blur:14px;
+  --primary:#ffd60a;
+  --shadow:rgba(0,0,0,0.45);
+  --neon-blue:#00d9ff;
+}
+body{margin:0;padding:0;font-family:'Modir',sans-serif;background:var(--bg-image) center/cover no-repeat fixed;color:var(--text-color);transition:.3s}
+.navbar{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.45);backdrop-filter:blur(10px);display:flex;gap:22px;justify-content:center;padding:12px;z-index:980}
+.navbar a{color:var(--primary);font-weight:bold;text-decoration:none}
+.call-floating{position:fixed;bottom:20px;right:20px;background:var(--primary);width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:30px;color:#000;box-shadow:0 0 18px rgba(255,214,10,.5);z-index:999}
+.glow{position:fixed;width:350px;height:350px;border-radius:50%;filter:blur(110px);z-index:-1}
+.glow1{top:-100px;right:-120px;background:#00c3ff;opacity:.6}
+.glow2{bottom:-120px;left:-120px;background:#ffd60a;opacity:.6}
+header{text-align:center;padding:70px 20px;background:rgba(0,0,0,0.45);backdrop-filter:blur(10px);position:relative;margin-top:50px}
+header h1{font-size:34px;font-weight:bold;color:#a0eaff;text-shadow:0 0 12px #00d9ff,0 0 24px #00d9ff,0 0 36px #00d9ff}
+header h2{font-size:28px;font-weight:bold;color:var(--neon-blue);margin-top:6px;text-shadow:0 0 8px #00d9ff,0 0 16px #00d9ff,0 0 24px #00d9ff}
+header .cta{display:inline-block;margin-top:22px;padding:14px 24px;background:var(--primary);color:#000;font-weight:bold;border-radius:18px;font-size:16px;box-shadow:0 0 20px rgba(255,214,10,.5)}
+.container{width:92%;margin:auto;padding-bottom:60px}
+.section-title{font-size:24px;font-weight:bold;margin-top:40px;text-shadow:0 0 8px #000}
+.services-list{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.service-item{background:rgba(255,255,255,0.07);padding:16px;border-radius:16px;cursor:pointer;backdrop-filter:blur(var(--blur));box-shadow:0 6px 16px var(--shadow);transition:.3s;border-right:4px solid var(--primary)}
+.service-item.active .service-content{max-height:200px;opacity:1;margin-top:10px}
+.service-content{max-height:0;overflow:hidden;opacity:0;font-size:14px;transition:.35s}
+.about,.whyus,.track-box,.request-form{margin-top:45px;background:rgba(255,255,255,0.06);padding:20px;border-radius:18px;box-shadow:0 8px 25px var(--shadow);backdrop-filter:blur(14px)}
+.request-form input,.request-form textarea,.request-form select,.track-box input{width:100%;padding:12px 14px;margin-top:10px;border:none;border-radius:14px;background:rgba(255,255,255,0.1);color:var(--text-color)}
+.request-form button,.track-box button{width:100%;padding:14px;margin-top:14px;border-radius:16px;border:none;background:var(--primary);color:#000;font-weight:bold;font-size:16px;box-shadow:0 0 20px rgba(255,214,10,.5);cursor:pointer}
+.footer{text-align:center;padding:25px;margin-top:40px;background:rgba(0,0,0,0.55);backdrop-filter:blur(10px);border-radius:16px;font-size:15px;opacity:.9;display:flex;flex-direction:column;gap:6px;align-items:center}
+.footer .socials a i{font-size:2em}
+.tracking-code{font-family:'Modir',sans-serif;font-weight:bold;font-size:20px;color:#00ffec;margin-top:10px;display:block}
+
+/* پنل ادمین */
+#adminBtn{position:fixed;bottom:20px;left:20px;width:55px;height:55px;border-radius:50%;background:#ffd60a;color:#000;display:flex;justify-content:center;align-items:center;font-size:22px;z-index:999;box-shadow:0 0 18px rgba(255,214,10,.5)}
+#adminPanel{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:500px;height:70%;background:rgba(0,0,0,0.75);backdrop-filter:blur(12px);border-radius:20px;padding:20px;z-index:99999;color:white;overflow-y:auto;box-shadow:0 0 25px rgba(255,214,10,0.4)}
+.details-box{margin-left:14px;margin-top:4px;padding:6px;border-left:2px solid #ffd60a}
+.status-btn{display:inline-block;width:35px;height:35px;margin:6px;border-radius:6px;color:#000;text-align:center;line-height:35px;font-weight:bold;cursor:pointer;user-select:none;font-size:14px;}
+.status-received{background:#f1c40f}
+.status-processing{background:#3498db}
+.status-ready{background:#2ecc71}
+</style>
+</head>
+<body>
+
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+
+<div class="navbar">
+  <a href="#services">خدمات</a>
+  <a href="#about">درباره</a>
+  <a href="#whyus">چرا ما</a>
+  <a href="#track">رهگیری</a>
+  <a href="#request">درخواست</a>
+</div>
+
+<a href="tel:09102971003" class="call-floating"><i class="fa-solid fa-phone"></i></a>
+
+<div id="adminBtn"><i class="fa-solid fa-lock"></i></div>
+
+<header>
+  <h1>مرکز تعمیرات تخصصی موبایل</h1>
+  <h2>Sohrab Fix</h2>
+  <a href="#request" class="cta">ثبت درخواست تعمیر</a>
+</header>
+
+<div class="container">
+
+<div class="section-title" id="services">خدمات ما</div>
+<div class="services-list">
+  <div class="service-item"><div class="service-title">تعویض باتری</div><div class="service-content">تعویض باتری با تست سلامت و تضمین عملکرد طولانی</div></div>
+  <div class="service-item"><div class="service-title">تعویض ال‌سی‌دی / تاچ / گلس</div><div class="service-content">نصب صفحه‌نمایش با کیفیت بالا و حساسیت استاندارد لمسی</div></div>
+  <div class="service-item"><div class="service-title">تعمیر تخصصی برد</div><div class="service-content">تعمیر CPU، هارد، آی‌سی و مدار پاور با تجهیزات پیشرفته</div></div>
+  <div class="service-item"><div class="service-title">مشکلات صدا</div><div class="service-content">رفع خش‌خش صدا، نویز، مشکل مکالمه و ویبره</div></div>
+  <div class="service-item"><div class="service-title">تعمیر سوکت شارژ</div><div class="service-content">رفع مشکل شارژ و تعویض سوکت بدون آسیب به برد</div></div>
+  <div class="service-item"><div class="service-title">تعمیر دوربین</div><div class="service-content">رفع مشکل لرزش، فوکوس و شکستگی لنز</div></div>
+  <div class="service-item"><div class="service-title">خدمات نرم‌افزاری موبایل</div><div class="service-content">فلش، نصب رام اصلی، حذف FRP و رفع کندی سیستم</div></div>
+  <div class="service-item"><div class="service-title">بازیابی اطلاعات</div><div class="service-content">ریکاوری عکس، فیلم و فایل‌های حذف شده با امنیت کامل</div></div>
+</div>
+
+<div class="section-title" id="about">درباره ما</div>
+<div class="about">مرکز تعمیرات تخصصی موبایل Sohrab Fix با سال‌ها تجربه در تعمیرات سخت‌افزار و نرم‌افزار موبایل، ارائه خدمات با کیفیت و قطعات اورجینال.</div>
+
+<div class="section-title" id="whyus">چرا Sohrab Fix؟</div>
+<div class="whyus">
+  <div style="display:flex;flex-direction:column;gap:14px;font-size:15px">
+    <div><i class="fa-solid fa-screwdriver-wrench"></i> تعمیر تخصصی با تجهیزات به‌روز</div>
+    <div><i class="fa-solid fa-microchip"></i> عیب‌یابی دقیق</div>
+    <div><i class="fa-solid fa-shield-halved"></i> قطعات اورجینال همراه ضمانت</div>
+    <div><i class="fa-solid fa-clock"></i> تحویل سریع</div>
+    <div><i class="fa-solid fa-user-check"></i> رضایت بالای مشتریان</div>
+  </div>
+</div>
+
+<div class="section-title" id="track">رهگیری وضعیت تعمیر</div>
+<div class="track-box">
+  <input type="text" id="trackCodeInput" placeholder="کد رهگیری خود را وارد کنید">
+  <button onclick="checkTrack()">نمایش وضعیت</button>
+  <div id="trackResult" style="margin-top:15px;font-size:16px"></div>
+</div>
+
+<div class="request-form" id="request">
+<h3>ثبت درخواست تعمیر گوشی</h3>
+<form id="form">
+  <input type="text" id="name" placeholder="نام و نام خانوادگی" required>
+  <input type="tel" id="phone" placeholder="شماره تماس" required>
+  <input type="text" id="model" placeholder="مدل گوشی" required>
+  <select id="serviceType" required>
+    <option value="">انتخاب خدمت</option>
+    <option value="battery">تعویض باتری</option>
+    <option value="lcd">تعویض ال‌سی‌دی</option>
+    <option value="board">تعمیر برد</option>
+    <option value="sound">مشکل صدا</option>
+    <option value="charger">سوکت شارژ</option>
+    <option value="camera">دوربین</option>
+    <option value="software">نرم‌افزار</option>
+    <option value="recover">ریکاوری اطلاعات</option>
+  </select>
+  <textarea id="problem" rows="4" placeholder="توضیح مشکل..." required></textarea>
+  <button type="submit">ارسال درخواست</button>
+</form>
+<div id="userCodeDisplay" style="margin-top:15px;font-size:16px;color:#00ffec;font-weight:bold"></div>
+</div>
+
+<div class="footer">
+  <div>09102971003</div>
+  <div class="socials" style="display:flex;gap:16px;margin-top:6px;">
+    <a href="https://instagram.com/sohrab.fix" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://t.me/sohrabfix" target="_blank"><i class="fab fa-telegram"></i></a>
+    <a href="https://wa.me/989102971003" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  </div>
+</div>
+
+<div id="adminPanel">
+  <h3 style="text-align:center;color:#ffd60a">پنل مدیریت</h3>
+  <div id="adminUserList"></div>
+  <button onclick="closeAdmin()" style="width:100%;margin-top:20px;padding:12px;border:none;border-radius:12px;background:#ffd60a;color:black;font-weight:bold">بستن</button>
+</div>
+
+<script>
+// داده‌ها و وضعیت‌ها
+const users={};
+const statusList=["دریافت شده","در حال بررسی","آماده تحویل"];
+const statusColor=["status-received","status-processing","status-ready"];
+const statusText = {
+  "دریافت شده": "گوشی شما وارد اتاق جادوی ما شد! 🪄",
+  "در حال بررسی": "تعمیرکارها با ذره‌بین و چکش مشغول کارند 🔧",
+  "آماده تحویل": "گوشی آماده است! وقتشه که آن را بغل کنید 📱✨"
+};
+
+// خدمات اکاردئون
+document.querySelectorAll('.service-item').forEach(i=>i.onclick=()=>i.classList.toggle('active'));
+
+// رهگیری
+function checkTrack(){
+  const code=document.getElementById("trackCodeInput").value.trim();
+  const user=Object.values(users).find(u=>u.code===code);
+  const result=document.getElementById("trackResult"); result.innerHTML="";
+  if(!user){ result.innerText="کد یافت نشد یا هنوز ثبت نشده است."; return; }
+  const subDiv=document.createElement("div");
+  [...user.subs].reverse().forEach(sub=>{
+    const h4=document.createElement("div"); h4.innerText=sub.model; h4.style.cursor="pointer"; h4.style.fontWeight="bold";
+    const details=document.createElement("div"); details.style.display="block"; details.style.marginTop="4px"; details.style.padding="6px"; details.style.border="1px solid #ffd60a"; details.style.borderRadius="8px";
+    const problem=document.createElement("div"); problem.innerText="مشکل: "+sub.problem;
+    const status=document.createElement("div"); status.innerText="وضعیت: "+(statusText[sub.status] || sub.status);
+    details.appendChild(problem); details.appendChild(status);
+    subDiv.appendChild(h4); subDiv.appendChild(details);
+  });
+  result.appendChild(subDiv);
+}
+
+// کد اشتراک
+function generateCode(phone){
+  for(const u of Object.values(users)) if(u.phone===phone) return u.code;
+  const rand=Math.floor(1000+Math.random()*9000);
+  return "SF"+rand;
+}
+
+// ارسال فرم
+const form=document.getElementById("form");
+form.onsubmit=e=>{
+  e.preventDefault();
+  const nameV=document.getElementById('name').value.trim();
+  const phoneV=document.getElementById('phone').value.trim();
+  const modelV=document.getElementById('model').value.trim();
+  const serviceV=document.getElementById('serviceType').value;
+  const problemV=document.getElementById('problem').value.trim();
+  if(!nameV||!phoneV||!modelV||!serviceV||!problemV) return;
+  const codeV=generateCode(phoneV);
+  if(!users[codeV]) users[codeV]={name:nameV,phone:phoneV,code:codeV,subs:[]};
+  users[codeV].subs.push({model:modelV,problem:problemV,status:"دریافت شده"});
+  document.getElementById('userCodeDisplay').innerHTML=`${nameV} عزیز، کد رهگیری شما: <span style="color:#00ffec;font-weight:bold;">${codeV}</span>`;
+
+  const txt=`درخواست تعمیر گوشی\nنام: ${nameV}\nشماره: ${phoneV}\nمدل: ${modelV}\nخدمت: ${serviceV}\nتوضیح مشکل: ${problemV}\nکد رهگیری: ${codeV}`;
+  const waUrl=`https://wa.me/989102971003?text=${encodeURIComponent(txt)}`;
+  const tgUrl=`https://t.me/sohrabfix?text=${encodeURIComponent(txt)}`;
+  const smsUrl=`sms:09102971003?body=${encodeURIComponent(txt)}`;
+
+  function openNext(url,next){
+    const win=window.open(url,"_blank");
+    if(!win && next) next();
+  }
+  openNext(waUrl,()=>openNext(tgUrl,()=>openNext(smsUrl,null)));
+};
+
+// پنل ادمین
+const adminPassword = "139720139720sh";
+const adminBtn=document.getElementById('adminBtn');
+const adminPanel=document.getElementById('adminPanel');
+const adminUserList=document.getElementById('adminUserList');
+adminBtn.onclick=()=>{
+  const pass=prompt("لطفاً رمز پنل ادمین را وارد کنید:");
+  if(pass===adminPassword){ adminPanel.style.display="block"; renderAdmin(); }
+  else if(pass!==null){ alert("رمز اشتباه است!"); }
+};
+function closeAdmin(){adminPanel.style.display="none";}
+
+function renderAdmin(){
+  adminUserList.innerHTML="";
+  Object.values(users).forEach(user=>{
+    const userDiv=document.createElement("div"); userDiv.style.borderBottom="1px solid #fff"; userDiv.style.padding="6px";
+    const h4=document.createElement("h4"); h4.innerText=`${user.name} - ${user.code}`; h4.style.cursor="pointer";
+    const subDiv=document.createElement("div"); subDiv.style.display="none"; subDiv.style.marginTop="6px";
+    user.subs.forEach(sub=>{
+      const modelH=document.createElement("div"); modelH.innerText=sub.model; modelH.style.cursor="pointer"; modelH.style.marginTop="4px";
+      const details=document.createElement("div"); details.className="details-box"; details.style.display="none";
+      const problem=document.createElement("div"); problem.innerText="مشکل: "+sub.problem;
+      const phoneDiv=document.createElement("div"); phoneDiv.innerText="شماره: "+user.phone;
+      const statusDiv=document.createElement("div"); statusDiv.innerText="وضعیت: ";
+      statusList.forEach((s,i)=>{
+        const btn=document.createElement("span"); btn.className="status-btn "+statusColor[i]; btn.title=s; btn.innerText=s; 
+        btn.onclick=()=>{sub.status=s; renderAdmin(); };
+        statusDiv.appendChild(btn);
+      });
+      details.appendChild(problem); details.appendChild(phoneDiv); details.appendChild(statusDiv);
+      modelH.onclick=()=>details.style.display=(details.style.display==="none"?"block":"none");
+      subDiv.appendChild(modelH); subDiv.appendChild(details);
+    });
+    h4.onclick=()=>subDiv.style.display=(subDiv.style.display==="none"?"block":"none");
+    userDiv.appendChild(h4); userDiv.appendChild(subDiv); adminUserList.appendChild(userDiv);
+  });
+}
+</script>
+
+</body>
+</html>
